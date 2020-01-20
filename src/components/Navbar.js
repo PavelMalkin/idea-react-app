@@ -6,7 +6,8 @@ class Navbar extends Component {
 
     render() {
 
-        console.log('props is', this.props.user);
+      //  console.log('props in Navbar is', this.props.user);
+
         const links = this.props.user.logined ? (
             <ul className="Navbar">
                 <li><Link to='/'>Home</Link></li>
@@ -30,7 +31,7 @@ class Navbar extends Component {
 }
 
 const mapStateToProps = (state) => (
-    {user: state}
+    {user: state.user}
 );
 
 

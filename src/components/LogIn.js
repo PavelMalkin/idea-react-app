@@ -15,10 +15,11 @@ class LogIn extends Component {
     handleSubmit = e => {
         e.preventDefault();
         const userData = this.state;
+        //console.log('userData', userData);
 
         axios.post('http://localhost:4000/login', userData)
             .then( res => {
-                console.log(res.data);
+                console.log('axios user login data',res.data);
                 const FBToken = 'Bearer '+ res.data.token;
                 this.props.login(userData, this.state.history, FBToken);
                 axios.defaults.headers.common['Authorization'] = FBToken;
