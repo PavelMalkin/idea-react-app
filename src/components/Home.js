@@ -11,7 +11,10 @@ class Home extends Component {
 
     render() {
 
-       // console.log("The Props in Home is", this.props.data.data);
+       // console.log("The Props in Home is", this.props.user.user.logined);
+        if (!this.props.user.user.logined){
+            this.props.history.push('/login');
+        }
 
         let data = 'No data';
         if (this.props.data.data.length) {
@@ -26,14 +29,7 @@ class Home extends Component {
             )
         }
 
-        console.log('data const is',data);
-
-
-        // let data = this.props.user.logined ? (
-        //    axios.get('http://localhost:4000/api/users')
-        //        .then(res => (res.data)
-        //          )
-        // ) : (<h2>There is no data</h2>);
+       // console.log('data const is',data);
 
         return (
             <div>
@@ -57,7 +53,8 @@ const mapDispatchToProps = (dispatch) => {
                dispatch({type: 'GET_DATA' , payload: res.data})
        ) );
 
-       }
+       },
+       dropData: () => dispatch({type: 'DROP_DATA'})
    }
 };
 

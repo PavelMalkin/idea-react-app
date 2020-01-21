@@ -8,7 +8,7 @@ const initState = {
 };
 
 export default function(state = initState, action) {
-    console.log('userReducer action is',action);
+   // console.log('userReducer action is',action);
     switch (action.type) {
        case 'USER_LOGIN':
             //action.history.push('/');
