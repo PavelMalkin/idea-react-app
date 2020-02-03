@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 export const getData = () => (dispatch) => {
     axios.get('http://localhost:4000/api/users')
         .then(res => (
@@ -14,3 +15,4 @@ export const login = (userData, history, FBToken) => (dispatch) => {
 export const getUserData = () => (dispatch) => {
     dispatch({type: 'LOADING_USER', username: 'Pasha'})
 };
+

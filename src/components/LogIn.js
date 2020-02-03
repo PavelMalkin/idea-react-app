@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux'
+import login from '../redux/actions/userActions'
 
 class LogIn extends Component {
     state = {
@@ -49,8 +50,10 @@ class LogIn extends Component {
 
     const mapDispatchToProps = (dispatch) => {
     return {
-     login: (userData, history, FBToken) => dispatch({type: 'USER_LOGIN', userData, history, FBToken})
+     login: (userData, history, FBToken) => dispatch(login(userData, history, FBToken))
  }
 };
+
+
 
 export default connect(null, mapDispatchToProps)(LogIn);

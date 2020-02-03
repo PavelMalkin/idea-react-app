@@ -9,7 +9,7 @@ import jwtDecode from 'jwt-decode'
 import axios from 'axios'
 // REDUX
 import store from "./redux/store";
-import { getData, getUserData } from './redux/userActions'
+// import { getData, getUserData } from './redux/userActions'
 
 
 const token = localStorage.FBToken;

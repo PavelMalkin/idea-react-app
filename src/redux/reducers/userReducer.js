@@ -4,7 +4,9 @@
 const initState = {
     username: '',
     logined: false,
-    FBToken: null
+    FBToken: null,
+    loginError: null,
+    registrationError: null
 };
 
 export default function(state = initState, action) {
