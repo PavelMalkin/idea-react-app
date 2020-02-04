@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import {connect} from 'react-redux'
-import login from '../redux/actions/userActions'
+import { loginUser } from '../redux/actions/userActions'
+
 
 class LogIn extends Component {
     state = {
@@ -15,21 +15,8 @@ class LogIn extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        const userData = this.state;
-        //console.log('history in login', this.props);
-
-        axios.post('http://localhost:4000/login', userData)
-            .then( res => {
-                console.log('axios user login data',res.data);
-                const FBToken = 'Bearer '+ res.data.token;
-                this.props.login(userData, this.props.history, FBToken);
-                axios.defaults.headers.common['Authorization'] = FBToken;
-                localStorage.setItem('FBToken', FBToken);
-                this.props.history.push('/')
-
-            })
-            .catch(err => (console.log(err.data)))
-
+        console.log('history in login', this.props.history);
+        this.props.loginUser(this.state, this.props.history);
     };
 
     render() {
@@ -41,19 +28,21 @@ class LogIn extends Component {
                 <label>Password </label>
                 <input type="password" id='password' onChange={this.handleChange}/>
                 <br/>
+                <p className="Red">{this.props.loginError}</p>
                 <button type="submit">Log In</button>
-
             </form>
         );
     }
 }
 
-    const mapDispatchToProps = (dispatch) => {
-    return {
-     login: (userData, history, FBToken) => dispatch(login(userData, history, FBToken))
- }
+const mapDispatchToProps = {
+    loginUser
 };
 
+const mapStateToProps = (state) => ({
+  loginError: state.user.loginError,
+
+});
 
 
-export default connect(null, mapDispatchToProps)(LogIn);
+export default connect(mapStateToProps, mapDispatchToProps)(LogIn);

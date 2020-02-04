@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios'
+
+import { signUpUser } from '../redux/actions/userActions'
 
 
 class SignUp extends Component {
@@ -14,22 +15,10 @@ class SignUp extends Component {
     };
 
     handleSubmit = e => {
-      e.preventDefault();
-      const userData = this.state;
-
-      axios.post('http://localhost:4000/register', userData)
-          .then( res => {
-              console.log('res registration form', res.data);
-              let FBToken = 'Bearer ' + res.data.token;
-              this.props.signUp(userData, FBToken);
-              axios.defaults.headers.common['Authorization'] = FBToken;
-              this.props.history.push('/');
-          })
-          .catch(err => {
-              console.log('Error data is', err.data);
-          })
-
+        e.preventDefault();
+        this.props.signUpUser(this.state, this.props.history);
     };
+
 
     render() {
         return (
@@ -40,16 +29,19 @@ class SignUp extends Component {
                 <label>Password </label>
                 <input type="password" id='password' onChange={this.handleChange}/>
                 <br/>
+                <p>{this.props.registrationError}</p>
                 <button type="submit">Sign Up</button>
             </form>
         );
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return{
-      signUp: (userData, FBToken) => dispatch({type:'USER_LOGIN', userData, FBToken})
-  }
+const mapStateToProps = state => ({
+    registrationError: state.user.registrationError
+});
+
+const mapDispatchToProps = {
+    signUpUser
 };
 
-export default connect(null,mapDispatchToProps)(SignUp);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

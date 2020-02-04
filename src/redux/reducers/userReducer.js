@@ -3,29 +3,36 @@
 
 const initState = {
     username: '',
-    logined: false,
+    isLoggedIn: false,
     FBToken: null,
     loginError: null,
     registrationError: null
 };
 
 export default function(state = initState, action) {
-   // console.log('userReducer action is',action);
+   console.log('userReducer action is', action);
     switch (action.type) {
-       case 'USER_LOGIN':
-            //action.history.push('/');
+       case 'LOGIN_SUCCESS':
             return {
                 ...state,
                 username: action.userData.username,
-                logined: true,
-                FBToken: action.FBToken
+                isLoggedIn: true,
+                FBToken: action.Token,
+                loginError: null
+            };
+
+        case 'LOGIN_ERROR':
+            console.log('userReducer action is', action);
+            return {
+                ...state,
+                loginError: action.err.response.statusText
             };
 
         case 'LOADING_USER':
             return {
                 ...state,
                 username: action.username,
-                logined: true,
+                isLoggedIn: true,
                 FBToken: localStorage.FBToken
             };
 
@@ -33,10 +40,25 @@ export default function(state = initState, action) {
             return {
                 ...state,
                 username: '',
-                logined: false,
+                isLoggedIn: false,
                 FBToken: null
             };
-          //
+
+        case 'REGISTER_FAILED':
+            return {
+                ...state,
+                registrationError: 'User already exist'
+            };
+
+        case 'REGISTER_SUCCESS':
+
+            return {
+                ...state,
+                isLoggedIn: true,
+                username: action.userData.username,
+                FBToken: action.Token,
+                registrationError: null
+            };
 
         default: return state;
 

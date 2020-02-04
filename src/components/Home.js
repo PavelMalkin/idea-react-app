@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
 import axios from 'axios';
+import { getData  } from '../redux/actions/userActions'
 
 
 class Home extends Component {
@@ -11,14 +12,15 @@ class Home extends Component {
 
     render() {
 
-       // console.log("The Props in Home is", this.props.user.user.logined);
-        if (!this.props.user.user.logined){
+        const { user ,data, getData} = this.props;
+
+        if (! user.isLoggedIn){
             this.props.history.push('/login');
         }
 
-        let data = 'No data';
-        if (this.props.data.data.length) {
-           data = this.props.data.data.map( res =>
+        let cards = 'No data';
+        if (data.length) {
+           cards = data.map( res =>
             <div key={res.id} className="cards">
                 <div>User Name is: {res.username}</div>
                 <div>Was created at: {res.created}</div>
@@ -33,29 +35,33 @@ class Home extends Component {
 
         return (
             <div>
-                {data}
-                <button onClick={() => this.props.getData()}>Grab Data</button>
+                {cards}
+                <button onClick={() => getData()}>Grab Data</button>
             </div>
         );
     }
 }
 
 const mapStateToProps = (state) => ({
-    user: state,
-    data: state.data
+    user: state.user,
+    data: state.data.data
 });
 
-const mapDispatchToProps = (dispatch) => {
-   return {
-       getData: () => {
-           axios.get('http://localhost:4000/api/users')
-           .then( res => (
-               dispatch({type: 'GET_DATA' , payload: res.data})
-       ) );
+// const mapDispatchToProps = (dispatch) => {
+//    return {
+//        getData: () => {
+//            axios.get('http://localhost:4000/api/users')
+//            .then( res => (
+//                dispatch({type: 'GET_DATA' , payload: res.data})
+//        ) );
+//
+//        },
+//        dropData: () => dispatch({type: 'DROP_DATA'})
+//    }
+// };
 
-       },
-       dropData: () => dispatch({type: 'DROP_DATA'})
-   }
+const mapDispatchToProps = {
+    getData
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
