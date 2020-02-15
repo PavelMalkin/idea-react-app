@@ -10,7 +10,7 @@ const initState = {
 };
 
 export default function(state = initState, action) {
-   console.log('userReducer action is', action);
+   // console.log('userReducer action is', action);
     switch (action.type) {
        case 'LOGIN_SUCCESS':
             return {
@@ -22,7 +22,7 @@ export default function(state = initState, action) {
             };
 
         case 'LOGIN_ERROR':
-            console.log('userReducer action is', action);
+            // console.log('userReducer action is', action);
             return {
                 ...state,
                 loginError: action.err.response.statusText

@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
 import User from "./components/User";
+import NewIdea from "./components/NewIdea";
 import jwtDecode from 'jwt-decode'
 import axios from 'axios'
 // REDUX
@@ -34,6 +35,7 @@ function App() {
                       <Route path='/login' component={LogIn}/>
                       <Route path='/signup' component={SignUp}/>
                       <Route path='/user' component={User}/>
+                      <Route path='/newidea' component={NewIdea}/>
                   </Switch>
               </BrowserRouter>
           </div>

@@ -17,11 +17,10 @@ class Navbar extends Component {
     };
 
     render() {
-      //  console.log('props in Navbar is', this.props.user);
-
            const links = this.props.user.isLoggedIn ? (
                <ul className="Navbar">
                    <li><Link to='/'>Home</Link></li>
+                   <li><Link to='/newidea'>New Idea</Link></li>
                    <li className="user" onClick={this.userInfo}><Link to='/user'>Hi, {this.props.user.username}</Link></li>
                    <li className="user" onClick={this.handleLogOut}><Link to='/login'>Log Out</Link></li>
                </ul>
@@ -35,7 +34,7 @@ class Navbar extends Component {
         );
 
         return (
-            <div>
+            <div className='navbar'>
           {links}
             </div>
         );

@@ -15,7 +15,6 @@ class LogIn extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        console.log('history in login', this.props.history);
         this.props.loginUser(this.state, this.props.history);
     };
 

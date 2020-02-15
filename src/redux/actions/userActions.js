@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 export const getData = () => (dispatch) => {
-    axios.get('http://localhost:4000/api/users')
+    axios.get('http://localhost:4000/api/idea')
         .then(res => (
             dispatch({type: 'GET_DATA', payload: res.data})
         ))
