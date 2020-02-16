@@ -31,7 +31,7 @@ export default function(state = initState, action) {
         case 'LOADING_USER':
             return {
                 ...state,
-                username: action.username,
+                username: action.payload,
                 isLoggedIn: true,
                 FBToken: localStorage.FBToken
             };

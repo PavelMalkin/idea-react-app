@@ -1,13 +1,5 @@
 import axios from "axios";
 
-
-export const getData = () => (dispatch) => {
-    axios.get('http://localhost:4000/api/idea')
-        .then(res => (
-            dispatch({type: 'GET_DATA', payload: res.data})
-        ))
-};
-
 export const loginUser = (userData, history) => dispatch => {
 
     axios.post('http://localhost:4000/login', userData)
@@ -50,7 +42,13 @@ export const logOutUser = () => dispatch => {
 };
 
 
-export const getUserData = () => (dispatch) => {
-    dispatch({type: 'LOADING_USER', username: 'Pasha'})
+export const checkIfLoginIn = () => dispatch => {
+    console.log('download user in actions');
+  axios.get('http://localhost:4000/auth/checkLogin')
+      .then(res => {
+          console.log('results login chek', res);
+      dispatch({type:'LOADING_USER', payload: res.data.username})
+      })
+      .catch(err => console.log(err))
 };
 

@@ -39,17 +39,17 @@ li.user {
 .cards {
   padding: 10px;
   margin: 15px;
-  background: pink;
-  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-  border-radius: 10px 10px 10px 10px;
+  background: darkgrey;
+  box-shadow: 5px 5px 2px 0px rgba(0,0,0,0.75);
+  border-radius: 5px;
 }
 
-.cards div{
-  margin-bottom: 10px;
-}
+/*.cards div{*/
+/*  margin-bottom: 10px;*/
+/*}*/
 
 p {
-  color: red;
+
 }
 
 /*Ideas*/
@@ -87,13 +87,48 @@ div.idea button {
 }
 
 /*Buttons*/
-button {
+button.reg-button {
   background-color: cadetblue;
   border-radius: 5px 5px 5px 5px;
   border: none;
   box-shadow: 3px 3px 2px 0px rgba(0,0,0,0.75);
-  /* display: inline-block; */
   margin-right: 5px;
+}
+
+/*VOTE*/
+/*Tooltip*/
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 300px;
+  background-color: gray;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  left: 105%;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
 
 
+/*buttons*/
+div.vote  {
+  padding: 0;
+  margin: 0;
+  width: fit-content;
+  cursor: pointer;
 }

@@ -28,6 +28,11 @@ export default function(state = initState, action) {
                 ...state,
                 data: []
             };
+        // case 'IDEA_UPVOTE':
+        //     return {
+        //         ...state,
+        //         data.ideas.
+        //     };
 
         default: return state;
 

@@ -8,10 +8,6 @@ export const getData = () => dispatch => {
         .catch( err => {
             alert(err);
         })
-
-
-
-
 };
 
 export const createIdea = (idea, history) => (dispatch) => {
@@ -25,12 +21,9 @@ export const createIdea = (idea, history) => (dispatch) => {
         .catch(err => {
             alert(err);
         })
-
 };
 
 export const deleteIdea = (idea) => (dispatch) => {
-
-
   axios.delete(`http://localhost:4000/api/idea/${idea}`)
       .then( () => {
           dispatch({type: 'DELETE_IDEA', payload: idea})
@@ -38,11 +31,10 @@ export const deleteIdea = (idea) => (dispatch) => {
       .catch(err => {
           console.log('deleteIdea err',err);
       })
-
 };
 
 export const updateIdea = (id, idea) => (dispatch) => {
-    console.log('idea',idea);
+    console.log('idea',idea , 'id' , id);
 
     axios.put(`http://localhost:4000/api/idea/${id}`,idea)
         .then(res => {
@@ -51,6 +43,23 @@ export const updateIdea = (id, idea) => (dispatch) => {
         .catch( err => {
             console.log('error updateIdea', err);
         })
+};
 
+export const upVote = (id) => (dispatch) => {
+    axios.post(`http://localhost:4000/api/idea/${id}/upvote`)
+        .then( res => {
+            dispatch({type: 'IDEA_UPVOTE', payload: res});
+            dispatch(getData());
+        })
+        .catch(err => {console.log('upvote error', err);});
+};
 
+export const downVote = (id) => (dispatch) => {
+    axios.post(`http://localhost:4000/api/idea/${id}/downvote`)
+        .then( res => {
+            // dispatch({type: '', payload: res})
+            console.log('downvote response', res);
+            dispatch(getData());
+        })
+        .catch(err => {console.log('upvote error', err);});
 };

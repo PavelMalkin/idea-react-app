@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
-import { getData, updateIdea, deleteIdea  } from '../redux/actions/dataActions'
-import Buttons from "./Buttons";
-import moment from 'moment'
+import { getData, updateIdea  } from '../redux/actions/dataActions'
+import NewPost from "./cards/NewPost";
+import Post from "./cards/Post";
 
 
 class Home extends Component {
     constructor(props) {
         super(props);
-        this.state = {updatedIdeaID: '',
+        this.state = {
+            updatedIdeaID: '',
             idea: null,
             description: null
         };
@@ -20,27 +21,11 @@ class Home extends Component {
         this.props.getData()
     }
 
-    handleDelete = (id) => {
-        this.props.deleteIdea(id);
-    };
-
-    handleChange= e => {
-        this.setState({[e.target.id]: e.target.value});
-    };
-
     handleSubmit = e => {
-        e.preventDefault();
-
-        let idea = {
-            idea: this.state.idea,
-            description: this.state.description
-        };
-        this.props.updateIdea(this.state.updatedIdeaID, idea);
         this.setState({
             updatedIdeaID: null
         });
     };
-
 
     handleInput = (id) => {
         let idea = this.props.ideas.find( res => res.id === id);
@@ -68,34 +53,19 @@ class Home extends Component {
 
                if (this.state.updatedIdeaID === res.id) {
                    return (
-                   <div className='idea'  key={res.id}>
-                       <form onSubmit={this.handleSubmit}>
-                           <span>Idea</span>
-                           <input type="text" id="idea" onChange={this.handleChange} value={this.state.idea} />
-                           <span>Content</span>
-                           <textarea className='idea-field' id="description" onChange={this.handleChange} value={this.state.description}/>
-                           <button>Post!</button>
-                       </form>
-                       <button onClick={this.handleUpdateCancel}>Cancel</button>
-                   </div>)
+                       < NewPost key={res.id}
+                                 handleUpdateCancel={this.handleUpdateCancel}
+                                 handleSubmit={this.handleSubmit}
+                                 idea={this.state}
+                       />
+                   );
                } else {
                    return (
-                       <div key={res.id} className="cards">
-                           <h3>IDEA : {res.idea}</h3>
-                           <p>{res.description}</p>
-                           <small>Created at: {moment(res.createdDate).format('DD/MMM/YY HH:MM')} by {res.author.username}</small>
-                           <br/>
-                           <small>{(res.createdDate === res.updated) ? null : (
-                               `Updated at: ` + moment(res.updated).format('DD/MMM/YY HH:MM')
-                           )}
-
-                           </small>
-                           {(user.isLoggedIn && user.username === res.author.username) ?
-                               <Buttons id={res.id} handleInput={this.handleInput} handleDelete={this.handleDelete}/>
-                               : null}
-                       </div>
-                   )
-               }
+                    <Post key={res.id}
+                          idea={res}
+                          handleInput={this.handleInput}
+                    />
+                   )}
            })
         }
 
@@ -113,9 +83,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-    getData,
-    updateIdea,
-    deleteIdea
+    getData
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
