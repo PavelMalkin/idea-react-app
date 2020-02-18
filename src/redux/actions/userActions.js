@@ -43,10 +43,8 @@ export const logOutUser = () => dispatch => {
 
 
 export const checkIfLoginIn = () => dispatch => {
-    console.log('download user in actions');
   axios.get('http://localhost:4000/auth/checkLogin')
       .then(res => {
-          console.log('results login chek', res);
       dispatch({type:'LOADING_USER', payload: res.data.username})
       })
       .catch(err => console.log(err))

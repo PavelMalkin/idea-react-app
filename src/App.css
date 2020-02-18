@@ -132,3 +132,14 @@ div.vote  {
   width: fit-content;
   cursor: pointer;
 }
+
+/*comments*/
+.comments {
+  margin: 0 0 0 10px;
+  padding: 0 0 0 10px;
+  background-color: aqua;
+}
+
+.comment {
+  margin-bottom: 10px;
+}

@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
-import { getData, updateIdea  } from '../redux/actions/dataActions'
+import { getData  } from '../redux/actions/dataActions'
 import NewPost from "./cards/NewPost";
 import Post from "./cards/Post";
+import Comment from "./cards/Comment"
 
 
 class Home extends Component {
@@ -13,8 +14,7 @@ class Home extends Component {
             idea: null,
             description: null
         };
-
-        this.handleInput = this.handleInput.bind(this);
+        // this.handleInput = this.handleInput.bind(this);
     };
 
     componentDidMount() {
@@ -44,7 +44,7 @@ class Home extends Component {
 
     render() {
 
-        const { user, getData, ideas} = this.props;
+        const { ideas} = this.props;
         let cards = 'No data';
 
 

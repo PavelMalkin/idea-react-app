@@ -63,3 +63,17 @@ export const downVote = (id) => (dispatch) => {
         })
         .catch(err => {console.log('upvote error', err);});
 };
+
+export const getComments = (id) => (dispatch) => {
+  axios.get(`http://localhost:4000/api/comment/idea/${id}`)
+      .then(res =>
+      dispatch({type:'LOAD_COMMENTS', payload: res}))
+      .catch( err => console.log('getComment Error', err))
+};
+
+export const addComment = (id, comment) => (dispatch) => {
+    console.log(comment);
+    axios.post(`http://localhost:4000/api/comment/idea/${id}`, comment)
+        .then( res => dispatch(getData()))
+        .catch(err => console.log('Comment Error', err))
+};

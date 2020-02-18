@@ -1,10 +1,14 @@
 import React, {Component} from 'react';
 import moment from "moment";
 import Buttons from "../Buttons";
+import Comment from "./Comment";
 import { connect } from 'react-redux'
-import {deleteIdea, upVote, downVote } from '../../redux/actions/dataActions'
+import {deleteIdea, upVote, downVote, addComment } from '../../redux/actions/dataActions'
 
 class Post extends Component {
+    state = {
+        comment: ''
+    };
 
     handleDelete = (id) => {
         this.props.deleteIdea(id);
@@ -16,6 +20,16 @@ class Post extends Component {
 
     handleDownvote = (id) => {
         this.props.downVote(id);
+    };
+
+    handleChange = (e) => {
+        this.setState({[e.target.name]: e.target.value})
+    };
+
+    handleCommentSubmit = (e) => {
+        e.preventDefault();
+        this.props.addComment(this.props.idea.id, this.state)
+        this.setState({comment: ''})
     };
 
 
@@ -63,6 +77,13 @@ class Post extends Component {
                         <div className="vote" onClick={() => this.handleDownvote(idea.id)}>-</div>
                     </div>
                 </div>
+                <div className="new-comment">
+                    <form onSubmit={this.handleCommentSubmit}>
+                        <input type="text" name='comment' onChange={this.handleChange} value={this.state.comment}/>
+                        <button>Comment</button>
+                    </form>
+                </div>
+                <Comment idea={idea}/>
             </div>
         );
     }
@@ -76,7 +97,8 @@ const mapStateToProps= (state) => ({
 const mapDispatchToProps = {
     deleteIdea,
     upVote,
-    downVote
+    downVote,
+    addComment
 };
 
 

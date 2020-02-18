@@ -1,6 +1,7 @@
 const initState = {
     ideas: [],
-    data: []
+    data: [],
+    comments: []
 };
 
 export default function(state = initState, action) {
@@ -28,6 +29,12 @@ export default function(state = initState, action) {
                 ...state,
                 data: []
             };
+        // case 'LOAD_COMMENTS':
+        //     console.log('Action load comment', action);
+        //     return {
+        //         ...state
+        //
+        //     };
         // case 'IDEA_UPVOTE':
         //     return {
         //         ...state,
