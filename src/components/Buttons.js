@@ -1,12 +1,23 @@
 import React, {Component} from 'react';
+import {IconButton} from "@material-ui/core";
+import DeleteIcon from '@material-ui/icons/Delete';
+import CreateIcon from '@material-ui/icons/Create';
 
 class Buttons extends Component {
     render() {
+
+        let { id, handleDelete,  handleInput} = this.props;
+
         return (
-                <div>
-                    <button className="reg-button" id={this.props.id} onClick={() => this.props.handleDelete(this.props.id)}><b>&#128465;</b></button>
-                    <button className="reg-button" id={this.props.id} onClick={() => this.props.handleInput(this.props.id)}><b>&#9998;</b></button>
-                </div>
+            <div>
+                <IconButton aria-label="delete" size="small" id={id} onClick={() => handleDelete(id)}>
+                    <DeleteIcon size="small"/>
+                </IconButton>
+
+                <IconButton id={id} onClick={() => handleInput(id)}>
+                    <CreateIcon/>
+                </IconButton>
+            </div>
         );
     }
 }

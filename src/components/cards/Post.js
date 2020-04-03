@@ -4,6 +4,7 @@ import Buttons from "../Buttons";
 import Comment from "./Comment";
 import { connect } from 'react-redux'
 import {deleteIdea, upVote, downVote, addComment } from '../../redux/actions/dataActions'
+import {Card, CardContent, Button, Typography, CardActions, CardActionArea, CardHeader, Tooltip  } from "@material-ui/core";
 
 class Post extends Component {
     state = {
@@ -48,16 +49,18 @@ class Post extends Component {
 
         return (
             <div>
-                <div key={key} className="cards">
-                    <h3>IDEA : {idea.idea}</h3>
-                    <p>{idea.description}</p>
-                    <small>Created
-                        at: {moment(idea.createdDate).format('DD/MMM/YY HH:MM')} by {idea.author.username}</small>
-                    <br/>
-                    <small>{(idea.createdDate === idea.updated) ? null : (
-                        `Updated at: ` + moment(idea.updated).format('DD/MMM/YY HH:MM')
-                    )}
-                    </small>
+                <Card key={key} className="cards">
+                    <CardContent>
+                        <h3>IDEA : {idea.idea}</h3>
+                        <p>{idea.description}</p>
+                        <small>Created
+                            at: {moment(idea.createdDate).format('DD/MMM/YY HH:MM')} by {idea.author.username}</small>
+                        <br/>
+                        <small>{(idea.createdDate === idea.updated) ? null : (
+                            `Updated at: ` + moment(idea.updated).format('DD/MMM/YY HH:MM')
+                        )}
+                        </small>
+                    </CardContent>
 
                     <div>
                         {(user.isLoggedIn && user.username === idea.author.username) ?
@@ -76,7 +79,7 @@ class Post extends Component {
                         </div>
                         <div className="vote" onClick={() => this.handleDownvote(idea.id)}>-</div>
                     </div>
-                </div>
+                </Card>
                 <div className="new-comment">
                     <form onSubmit={this.handleCommentSubmit}>
                         <input type="text" name='comment' onChange={this.handleChange} value={this.state.comment}/>

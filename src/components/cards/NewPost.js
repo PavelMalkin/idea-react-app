@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
 import { updateIdea, createIdea } from '../../redux/actions/dataActions'
+import Button from "@material-ui/core/Button";
 
 class NewPost extends Component {
     state = {
@@ -33,17 +34,18 @@ class NewPost extends Component {
     render() {
 
         let {handleUpdateCancel, key} = this.props;
+        let {idea, description} = this.state;
 
         return (
             <div className='idea'  key={key}>
                 <form onSubmit={this.handleSubmit}>
                     <span>Idea</span>
-                    <input type="text" id="idea" onChange={this.handleChange} value={this.state.idea} />
+                    <input type="text" id="idea" onChange={this.handleChange} value={idea} />
                     <span>Content</span>
-                    <textarea className='idea-field' id="description" onChange={this.handleChange} value={this.state.description}/>
-                    <button className='reg-button'>Post!</button>
+                    <textarea className='idea-field' id="description" onChange={this.handleChange} value={description}/>
+                    <Button size="small" variant="contained" color="primary">Post!</Button>
                 </form>
-                <button className="reg-button" onClick={() => handleUpdateCancel()}>Cancel</button>
+                <Button size="small" variant="contained" color="primary" onClick={() => handleUpdateCancel()}>Cancel</Button>
             </div>
         );
     }
